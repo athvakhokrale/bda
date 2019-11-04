@@ -1,0 +1,91 @@
+go to cd flume
+then
+net.conf 
+# Naming the components on the current agent
+
+NetcatAgent.sources = Netcat
+NetcatAgent.channels = MemChannel
+NetcatAgent.sinks = LoggerSink
+
+# Describing/Configuring the source
+
+NetcatAgent.sources.Netcat.type = netcat
+NetcatAgent.sources.Netcat.bind = localhost
+NetcatAgent.sources.Netcat.port = 56565
+NetcatAgent.sources.Netcat.channels = MemChannel
+
+# Describing/Configuring the sink
+
+NetcatAgent.sinks.LoggerSink.type = logger
+NetcatAgent.sinks.LoggerSink.channel = MemChannel
+
+# Describing/Configuring the channel
+
+NetcatAgent.channels.MemChannel.type = memory
+NetcatAgent.channels.MemChannel.capacity = 1000
+NetcatAgent.channels.MemChannel.transactionCapacity = 100
+
+bin/flume-ng agent -c ~/flume/ -f ~/flume/net.conf --name NetcatAgent -Dflume.root.logger=INFO,console
+
+telnet localhost 56565
+
+hdfs adding experiment
+go to the sbin of the hadoop folder
+cd /usr/local/hadoop/sbin
+
+hdfs dfs -mkdir hdfs://localhost:50070/user/hduser/flumedata or hdfs://localhost:8020/user/hduser/flumedata
+
+nethd.conf
+NetcatAgent.sources = Netcat
+NetcatAgent.channels = MemChannel
+NetcatAgent.sinks = hdfsâsink
+
+NetcatAgent.sources.Netcat.type = netcat
+NetcatAgent.sources.Netcat.bind = localhost
+NetcatAgent.sources.Netcat.port = 56563
+NetcatAgent.sources.Netcat.channels = MemChannel
+
+NetcatAgent.channels.MemChannel.type = memory
+NetcatAgent.channels.MemChannel.capacity = 1000
+
+# Define a source on agent and connect to channel memoryChannel. 
+
+NetcatAgent.sinks.hdfsâsink.type = hdfs 
+NetcatAgent.sinks.hdfsâsink.channel = MemChannel 
+NetcatAgent.sinks.hdfsâsink.hdfs.path = hdfs://localhost:50070/user/hduser/flumedata/ 
+NetcatAgent.sinks.hdfsâsink.hdfs.fileType = DataStream
+NetcatAgent.sinks.hdfsâsink.hdfs.writeFormat = Text
+NetcatAgent.sinks.hdfsâsink.hdfs.filePrefix=
+NetcatAgent.sinks.hdfsâsink.hdfs.fileSuffix=.txt
+
+
+8020 in localhost too in path
+
+bin/flume-ng agent -c ~/flume/ -f ~/flume/nethd.conf --name NetcatAgent -Dflume.root.logger=INFO,console
+
+telnet localhost 56563
+
+hdfs dfs -ls /user/hduser/flumedata/
+hdfs dfs -cat /user/hduser/flumedata/FlumeData.1476018771029.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
