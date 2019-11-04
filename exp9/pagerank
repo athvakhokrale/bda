@@ -1,0 +1,30 @@
+d50110@d50110-ThinkCentre-M720t:~$ java PageRank
+Enter the Number of WebPages 
+
+3
+Enter the Adjacency Matrix with 1->PATH &amp; 0->NO PATH Betweentwo WebPages: 
+
+1 0 1
+1 1 1
+1 0 0
+ Total Number of Nodes :3.0     Initial PageRank of All Nodes:0.3333333333333333
+
+ Initial PageRank Values , 0th Step 
+ Page Rank of 1 is :    0.3333333333333333
+ Page Rank of 2 is :    0.3333333333333333
+ Page Rank of 3 is :    0.3333333333333333
+
+ After 1th Step 
+ Page Rank of 1 is :    0.5
+ Page Rank of 2 is :    0.0
+ Page Rank of 3 is :    0.5
+
+ After 2th Step 
+ Page Rank of 1 is :    0.5
+ Page Rank of 2 is :    0.0
+ Page Rank of 3 is :    0.5
+
+ Final Page Rank : 
+ Page Rank of 1 is :    0.575
+ Page Rank of 2 is :    0.15000000000000002
+ Page Rank of 3 is :    0.575
