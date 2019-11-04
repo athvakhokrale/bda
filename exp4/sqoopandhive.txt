@@ -1,0 +1,6 @@
+sqoop import --connect jdbc:mysql://localhost:3306/a --table a1 --username hadoop --password 123456 --target-dir /sqooptransfer/a -m 1
+
+
+create external table pro(eid int , sal int) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' LOCATION '/sqooptransfer/a';
+
+
