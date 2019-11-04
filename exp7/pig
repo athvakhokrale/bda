@@ -1,0 +1,12 @@
+sqoop import --connect jdbc:mysql://localhost:3306/jd --table jdemp --username hadoop --password 123456 --target-dir /sqooptransfer/jd -m 1
+
+cd hadoop2/bin 
+
+pig -x local
+
+sqoopdata = LOAD 'hdfs://localhost:8020/sqooptransfer/jd'USING PigStorage(',') AS (eid:int,sal:int);
+
+output1 = FILTER sqoopdata BY sal > 0; 
+
+dump output1;
+
